@@ -1,26 +1,23 @@
 #!/usr/bin/python3
-import datetime
 import random
+import datetime
 
-# get the current day of the week
-today = datetime.datetime.today().weekday()
+# Get current day of the week as an integer (0 = Monday, 1 = Tuesday, etc.)
+day_of_week = datetime.datetime.today().weekday()
 
-# check if it's a working day (Monday to Friday)
-if today < 5:
-    # define the file names
-    files = ["abs_core", "arms_grip", "back", "chest_shoulders", "gluts_hamstrings_legs"]
+# Define directory paths
+dir_paths = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
 
-    # choose the file to import based on the day of the week
-    file_to_import = files[today]
+# Get lines from files in relevant directory for today's day of the week
+lines = []
+for i in range(5):
+    with open(f"{dir_paths[day_of_week]}/{i}", "r") as f:
+        lines.append(random.choice(f.readlines()).strip())
 
-    # read the file and store the lines in a list
-    with open(file_to_import) as f:
-        lines = f.readlines()
+# Randomize order of lines
+random.shuffle(lines)
 
-    # get 5 random lines from the list
-    random_lines = random.sample(lines, k=5)
-
-    # print the random lines to stdout
-    for line in random_lines:
-        print(line.strip())
+# Print out lines
+for line in lines:
+    print(line)
 
