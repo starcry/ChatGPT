@@ -12,7 +12,7 @@ if day_of_week >= 5:
     day_of_week = random_day
 
 # Define directory paths
-dir_paths = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
+dir_paths = ['monday', 'teusday', 'wednesday', 'thursday', 'friday']
 
 # Get lines from files in relevant directory for today's day of the week
 lines = []
