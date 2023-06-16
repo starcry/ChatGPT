@@ -8,7 +8,7 @@ LOOP=""
 PREVIOUS=0
 FILE="${1:-flashCards.csv}"
 ORDER="${2:-r}"
-LANGUAGE_DIR="${3:-polish}"
+LANGUAGE_DIR="${3:-italian}"
 
 IFS=$'\n'
 while [ "$LOOP" == "" ]; do
