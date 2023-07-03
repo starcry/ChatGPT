@@ -1,9 +1,5 @@
 #!/bin/bash
 
-echo "https://www.polishpod101.com/polish-word-lists/?list=1"
-echo "https://www.polonista.pl/jutro"
-read
-
 LOOP=""
 PREVIOUS=0
 FILE="${1:-flashCards.csv}"
