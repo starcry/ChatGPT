@@ -1,8 +1,5 @@
 import calendar
 import sys
-import requests
-import json
-import os
 
 class WeekendDates:
     def __init__(self, month_name):
@@ -47,30 +44,13 @@ class WeekendDates:
             dates.append([friday_date, sunday_date])
         return dates
 
-    def get_flights(self, dates):
-        #base_url = "http://partners.api.skyscanner.net/apiservices/browseroutes/v1.0/"
-        base_url = "https://partners.api.skyscanner.net/apiservices/"
-        api_key = os.getenv('SKYAPI')
-        for date_pair in dates:
-            params = {
-                "country": "UK",
-                "currency": "GBP",
-                "locale": "en-GB",
-                "originPlace": "LON",
-                "destinationPlace": "anywhere",
-                "outboundPartialDate": date_pair[0],
-                "inboundPartialDate": date_pair[1],
-                "apiKey": api_key
-            }
-            response = requests.get(base_url, params=params)
-            data = json.loads(response.text)
-            print(json.dumps(data, indent=4))
-
 if len(sys.argv) < 2:
     print("Please provide a month as a command line argument.")
     sys.exit(1)
 
 weekend_dates = WeekendDates(sys.argv[1])
 dates = weekend_dates.get_weekend_dates()
-weekend_dates.get_flights(dates)
+
+for date_pair in dates:
+    print(date_pair)
 

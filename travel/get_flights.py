@@ -48,8 +48,7 @@ class WeekendDates:
         return dates
 
     def get_flights(self, dates):
-        #base_url = "http://partners.api.skyscanner.net/apiservices/browseroutes/v1.0/"
-        base_url = "https://partners.api.skyscanner.net/apiservices/"
+        base_url = "http://partners.api.skyscanner.net/apiservices/browseroutes/v1.0/"
         api_key = os.getenv('SKYAPI')
         for date_pair in dates:
             params = {
