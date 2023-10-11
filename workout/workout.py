@@ -2,52 +2,54 @@
 import random
 import datetime
 import argparse
+import os
 
-def print_random_lines(directory, file_count, title):
-    """
-    Get a random line from each file in the specified directory and print them.
-    """
+def print_random_lines(directory, file_count, title, delimiter=None):
+    """Print a random line from each file in the specified directory."""
     print(f"\n{title}")
     print("-" * len(title))
 
     for i in range(file_count):
         with open(f"{directory}/{i}", "r") as f:
-            print(random.choice(f.readlines()).strip())
+            line = random.choice(f.readlines()).strip()
+            if delimiter:
+                parts = line.split(delimiter)
+                exercise = parts[0].strip()
+                timestamp = parts[1].strip()
+                youtube_url = f"https://www.youtube.com/watch?v=hqOQDtjbvtA&t={timestamp}"
+                print(f"{exercise}\n{youtube_url}\n")
+            else:
+                print(line)
 
-# Create argument parser
-parser = argparse.ArgumentParser()
-parser.add_argument("-d", "--day", help="Specify the day of the week (monday, tuesday, ..., sunday, t=tomorrow, r=random)")
+def main():
+    """Main function to execute the script."""
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-d", "--day", help="Specify the day of the week.")
+    args = parser.parse_args()
 
-# Parse arguments
-args = parser.parse_args()
+    day_of_week = datetime.datetime.today().weekday()
+    if day_of_week >= 5:
+        day_of_week = random.randint(0, 4)
 
-# Get current day of the week as an integer (0 = Monday, 1 = Tuesday, etc.)
-day_of_week = datetime.datetime.today().weekday()
-
-# If today is a weekend day (5 = Saturday, 6 = Sunday), choose a random weekday
-if day_of_week >= 5:
-    day_of_week = random.randint(0, 4)  # 0 = Monday, 1 = Tuesday, ..., 4 = Friday
-
-# Check if a day was passed as an argument
-if args.day:
-    if str(args.day).lower() == "t":
-        day_of_week = (day_of_week + 1) % 7
-    elif str(args.day).lower() == "r":
-        day_of_week = random.randint(0, 4)  # 0 = Monday, 1 = Tuesday, ..., 4 = Friday
-    else:
+    if args.day:
+        day_arg = args.day.lower()
         days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
-        if args.day.lower() in days:
-            day_of_week = days.index(args.day.lower())
+
+        if day_arg == "t":
+            day_of_week = (day_of_week + 1) % 7
+        elif day_arg == "r":
+            day_of_week = random.randint(0, 4)
+        elif day_arg in days:
+            day_of_week = days.index(day_arg)
         else:
-            print("Invalid day argument. Please enter a day of the week, 't' for tomorrow, or 'r' for random.")
+            print("Invalid day argument.")
             exit(1)
 
-# Define directory paths
-dir_paths = ['monday', 'teusday', 'wednesday', 'thursday', 'friday']
+    dir_paths = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
+    print_random_lines("cardio", 6, "Cardio")
+    print_random_lines(dir_paths[day_of_week], 5, "Circuit Training")
+    print_random_lines("mobility", 2, "Mobility and Flexibility Exercises", delimiter=",")
 
-# Get and print lines from cardio directory
-print_random_lines("cardio", 6, "cardio")
-
-# Get and print lines from today's directory
-print_random_lines(dir_paths[day_of_week], 5, "circuit training")
+if __name__ == "__main__":
+    main()
 
