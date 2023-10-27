@@ -12,14 +12,7 @@ def print_random_lines(directory, file_count, title, delimiter=None):
     for i in range(file_count):
         with open(f"{directory}/{i}", "r") as f:
             line = random.choice(f.readlines()).strip()
-            if delimiter:
-                parts = line.split(delimiter)
-                exercise = parts[0].strip()
-                timestamp = parts[1].strip()
-                youtube_url = f"https://www.youtube.com/watch?v=hqOQDtjbvtA&t={timestamp}"
-                print(f"{exercise}\n{youtube_url}\n")
-            else:
-                print(line)
+            print(line)
 
 def main():
     """Main function to execute the script."""
@@ -48,7 +41,7 @@ def main():
     dir_paths = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
     print_random_lines("cardio", 6, "Cardio")
     print_random_lines(dir_paths[day_of_week], 5, "Circuit Training")
-    print_random_lines("mobility", 2, "Mobility and Flexibility Exercises", delimiter=",")
+    print_random_lines("mobility", 2, "Mobility and Flexibility Exercises")
 
 if __name__ == "__main__":
     main()
