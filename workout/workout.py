@@ -26,7 +26,7 @@ def main():
 
     if args.day:
         day_arg = args.day.lower()
-        days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+        days = ['monday', 'teusday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
 
         if day_arg == "t":
             day_of_week = (day_of_week + 1) % 7
@@ -38,7 +38,7 @@ def main():
             print("Invalid day argument.")
             exit(1)
 
-    dir_paths = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
+    dir_paths = ['monday', 'teusday', 'wednesday', 'thursday', 'friday']
     print_random_lines("cardio", 6, "Cardio")
     print_random_lines(dir_paths[day_of_week], 5, "Circuit Training")
     print_random_lines("mobility", 2, "Mobility and Flexibility Exercises")
